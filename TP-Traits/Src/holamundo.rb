@@ -12,8 +12,6 @@ class Class
       self.agregar_metodo(metodoHash[0],metodoHash[1])
     end
   end
-
-
 end
 
 
@@ -31,7 +29,7 @@ end
 #class TraitConcreto
 #  attr_accessor :metodoConcreto
 #
-#end
+#en
 
 class TraitLoco< Trait
   def initialize
