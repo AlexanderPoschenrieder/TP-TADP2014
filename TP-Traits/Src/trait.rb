@@ -24,4 +24,12 @@ class Trait
     nuevoTrait.metodosTrait =(metodos)
     Object.const_set(nombre,nuevoTrait)
   end
+
+  def + otroTrait
+
+  end
+
+  def - unMetodo
+
+  end
 end
