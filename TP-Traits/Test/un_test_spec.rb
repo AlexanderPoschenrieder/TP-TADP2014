@@ -4,6 +4,6 @@ describe 'My behaviour' do
 
   it 'should do something' do
 
-    true.should == false
+    true.should == true
   end
 end
