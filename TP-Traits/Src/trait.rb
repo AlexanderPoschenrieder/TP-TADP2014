@@ -1,14 +1,20 @@
-
+require 'rspec'
+require '../../TP-Traits/Src/trait.rb'
+require '../../TP-Traits/Src/clase.rb'
 class Trait
   attr_accessor :nombreTrait
   attr_accessor :metodosTrait
 
+  ##Chequea que el metodo no exista
+  ## y lo agrega
   def agregar_metodo (unaClase,nombre,bloque)
     if (!unaClase.instance_methods.include?(nombre))
       unaClase.send :define_method, nombre, bloque
     end
   end
 
+  ##Agrega todos los metodos del Trait
+  ##
   def agregarMetodos unaClase
     self.metodosTrait.each do
     |metodoHash|
@@ -25,10 +31,26 @@ class Trait
     Object.const_set(nombre,nuevoTrait)
   end
 
-  def + otroTrait
-
+  ##Falta implementar
+  ##Recibe un Trait y retorna una nueva instancia de Trait
+  ##Que tiene todos los metodos
+  def + unTrait
+    #traitAux = Trait.new()
+    #traitAux.metodosTrait = self.metodosTrait
+    #metodosParaAgregar = unTrait.metodosTrait
+    #metodosParaAgregar.each do |metodo|
+    #  if (!traitAux.metodosTrait[metodo[0]])
+    #    traitAux.metodosTrait << metodo
+    #    metodosParaAgregar >> metodo
+    #  end
+    #end
+    #if (metodosParaAgregar!=nil)
+    #  raise 'HAY UN METODO REPETIDOOOOOO!'
+    #end
+    #traitAux
   end
 
+  ##Falta implementar
   def - unMetodo
 
   end

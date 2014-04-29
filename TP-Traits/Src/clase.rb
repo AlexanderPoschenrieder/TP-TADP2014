@@ -3,4 +3,3 @@ class Class
     unTrait.agregarMetodos(self)
   end
 end
-

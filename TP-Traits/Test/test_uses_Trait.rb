@@ -1,6 +1,6 @@
 require 'rspec'
 require '../../TP-Traits/Src/trait.rb'
-require '../../TP-Traits/Src/holamundo.rb'
+require '../../TP-Traits/Src/clase.rb'
 
 describe 'My behaviour' do
      bloques={
@@ -31,5 +31,4 @@ describe 'My behaviour' do
   it 'chequea que no se pisen los metodos' do
     numero6.miNumeroFavoritoEs.should==6
   end
-
 end
