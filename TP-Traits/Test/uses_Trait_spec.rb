@@ -2,11 +2,11 @@ require 'rspec'
 require '../../TP-Traits/Src/trait.rb'
 require '../../TP-Traits/Src/clase.rb'
 
-describe 'My behaviour' do
+describe 'El metodo Uses agrega los metodos' do
      bloques={
         :miNumeroFavoritoEs=>lambda{3},
-        :devuelve5 =>lambda{5}}
-
+        :devuelve5 =>lambda{5}
+     }
 
     Trait.define(:TraitLoco,bloques)
 
