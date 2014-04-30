@@ -3,12 +3,15 @@ require '../../TP-Traits/Src/trait.rb'
 require '../../TP-Traits/Src/clase.rb'
 
 describe 'My behaviour' do
+  #-----------------------------------------------------------------------------
+  #--------------Juego de datos-------------------------------------------------
   metodos1={
       :metodo1=> lambda{5},
       :metodo2=> lambda{6}
   }
   Trait.define(:ElGranTrait,metodos1)
-
+  #-----------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
   it 'resta el metodo1 al Trait' do
     nuevoTrait= ElGranTrait-:metodo1
     nuevoTrait.metodosTrait.include?(:metodo1).should==false

@@ -3,7 +3,9 @@ require '../../TP-Traits/Src/trait.rb'
 require '../../TP-Traits/Src/clase.rb'
 
 describe 'El metodo Uses agrega los metodos' do
-     bloques={
+  #-----------------------------------------------------------------------------
+  #--------------Juego de datos-------------------------------------------------
+  bloques={
         :miNumeroFavoritoEs=>lambda{3},
         :devuelve5 =>lambda{5}
      }
@@ -23,6 +25,8 @@ describe 'El metodo Uses agrega los metodos' do
     numero6= Devuelve_numero6.new
     numero5=Devuelve_numero5y3.new
 
+  #-----------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
   it 'chequea que se agreguen los metodos' do
     numero5.miNumeroFavoritoEs.should==3
     numero5.devuelve5.should== 5

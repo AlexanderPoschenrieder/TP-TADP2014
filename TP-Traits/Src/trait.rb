@@ -36,7 +36,19 @@ class Trait
   ##Recibe un Trait y retorna una nueva instancia de Trait
   ##Que tiene todos los metodos
   def + unTrait
-
+    traitAux= Trait.new()
+    metodosT1={}.merge self.metodosTrait
+    metodosT2= {}.merge unTrait.metodosTrait
+    metodosT2.each do
+      |unElemento|
+      if !(metodosT1.has_key? unElemento[0])
+        metodosT1[unElemento[0]]=unElemento[1]
+      else                                  ## Se tira la excepcion ahora, otra podria ser guardar los metodos repetidos
+        raise 'Se repite un método'         ## y ver que se puede hacer con ellos
+      end
+    end
+    traitAux.metodosTrait=metodosT1
+    traitAux
   end
 
   ##Falta implementar
