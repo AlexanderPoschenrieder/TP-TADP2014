@@ -22,9 +22,6 @@ describe 'Suma de dos traits' do
 
   #-----------------------------------------------------------------------------
   #-----------------------------------------------------------------------------
-  it 'tira excepción' do
-    expect {UnSeñorTrait+OtroSeñorTrait}.to raise_error
-  end
 
   it 'se suman dos traits' do
 
@@ -37,4 +34,14 @@ describe 'Suma de dos traits' do
     unObjeto.metodo2.should==2
     unObjeto.metodo3.should==4
   end
+
+  it 'tira excepción' do
+    expect {UnSeñorTrait+OtroSeñorTrait}.to raise_error
+  end
+
+  it 'la suma no afecta a los traits originales' do
+    UnSeñorTrait+UnTraitComun
+    UnSeñorTrait.metodosTrait[:metodo3].should== nil
+  end
+
 end
