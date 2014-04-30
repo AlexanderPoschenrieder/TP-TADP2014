@@ -4,6 +4,7 @@ require '../../TP-Traits/Src/clase.rb'
 class Trait
   attr_accessor :nombreTrait
   attr_accessor :metodosTrait
+  attr_accessor :estrategia
 
   ##Chequea que el metodo no exista
   ## y lo agrega
@@ -35,23 +36,14 @@ class Trait
   ##Recibe un Trait y retorna una nueva instancia de Trait
   ##Que tiene todos los metodos
   def + unTrait
-    #traitAux = Trait.new()
-    #traitAux.metodosTrait = self.metodosTrait
-    #metodosParaAgregar = unTrait.metodosTrait
-    #metodosParaAgregar.each do |metodo|
-    #  if (!traitAux.metodosTrait[metodo[0]])
-    #    traitAux.metodosTrait << metodo
-    #    metodosParaAgregar >> metodo
-    #  end
-    #end
-    #if (metodosParaAgregar!=nil)
-    #  raise 'HAY UN METODO REPETIDOOOOOO!'
-    #end
-    #traitAux
+
   end
 
   ##Falta implementar
   def - unMetodo
-
+    traitAux= Trait.new()
+    traitAux.metodosTrait={}.merge self.metodosTrait ##se usa el {}.merge para que se duplique el hash
+    traitAux.metodosTrait.delete(unMetodo)
+    traitAux
   end
 end
