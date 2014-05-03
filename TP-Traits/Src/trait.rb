@@ -1,10 +1,7 @@
 require 'rspec'
-require '../../TP-Traits/Src/trait.rb'
-require '../../TP-Traits/Src/clase.rb'
+
 class Trait
-  attr_accessor :nombreTrait
-  attr_accessor :metodosTrait
-  attr_accessor :estrategia
+  attr_accessor :nombreTrait, :metodosTrait, :estrategia, :metodosConflictivos
 
   ##Chequea que el metodo no exista
   ## y lo agrega
@@ -17,8 +14,7 @@ class Trait
   ##Agrega todos los metodos del Trait
   ##
   def agregarMetodos unaClase
-    self.metodosTrait.each do
-    |metodoHash|
+    self.metodosTrait.each do |metodoHash|
       self.agregar_metodo(unaClase,metodoHash[0],metodoHash[1])
     end
   end
@@ -27,34 +23,32 @@ class Trait
   #Se le pasa un SYMBOL como nombre y un mapa de (mensaje=>metodo)
   #Crea una constante con ese nombre y mete el Trait
   def self.define(nombre,metodos)
-    nuevoTrait=Trait.new()
-    nuevoTrait.metodosTrait =(metodos)
+    nuevoTrait=Trait.new
+    nuevoTrait.metodosTrait= (metodos)
     Object.const_set(nombre,nuevoTrait)
   end
 
-  ##Falta implementar
+
   ##Recibe un Trait y retorna una nueva instancia de Trait
   ##Que tiene todos los metodos
   def + unTrait
-    traitAux= Trait.new()
-    metodosT1={}.merge self.metodosTrait
-    metodosT2= {}.merge unTrait.metodosTrait
-    metodosT2.each do
-      |unElemento|
+    traitAux= Trait.new
+    metodosT1= self.metodosTrait.clone
+    metodosT2= unTrait.metodosTrait.clone
+    metodosT2.each{|unElemento|
       if !(metodosT1.has_key? unElemento[0])
-        metodosT1[unElemento[0]]=unElemento[1]
-      else                                  ## Se tira la excepcion ahora, otra podria ser guardar los metodos repetidos
-        raise 'Se repite un método'         ## y ver que se puede hacer con ellos
+        metodosT1.store(unElemento[0],unElemento[1])
+        metodosT2.delete(unElemento[0])
       end
-    end
-    traitAux.metodosTrait=metodosT1
+    }
+    traitAux.metodosTrait= metodosT1
+    traitAux.metodosConflictivos= metodosT2
     traitAux
   end
 
-  ##Falta implementar
   def - unMetodo
-    traitAux= Trait.new()
-    traitAux.metodosTrait={}.merge self.metodosTrait ##se usa el {}.merge para que se duplique el hash
+    traitAux= Trait.new
+    traitAux.metodosTrait= self.metodosTrait.clone
     traitAux.metodosTrait.delete(unMetodo)
     traitAux
   end
