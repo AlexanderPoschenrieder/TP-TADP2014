@@ -52,4 +52,12 @@ class Trait
     traitAux.metodosTrait.delete(unMetodo)
     traitAux
   end
+
+  def << dos_nombres
+    traitAux= Trait.new
+    traitAux.metodosTrait= self.metodosTrait.clone
+    traitAux.metodosTrait[dos_nombres[1]]=traitAux.metodosTrait[dos_nombres[0]]
+    traitAux.metodosTrait.delete(dos_nombres[0])
+    traitAux
+  end
 end
