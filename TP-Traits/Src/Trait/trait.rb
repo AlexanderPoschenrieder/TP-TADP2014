@@ -1,7 +1,5 @@
-require 'rspec'
-
 class Trait
-  attr_accessor :nombreTrait, :metodosTrait, :estrategia, :metodosConflictivos
+  attr_accessor :nombreTrait, :metodosTrait
 
   ##Chequea que el metodo no exista
   ## y lo agrega
@@ -32,7 +30,7 @@ class Trait
   ##Recibe un Trait y retorna una nueva instancia de Trait
   ##Que tiene todos los metodos
   def + unTrait
-    traitAux= Trait.new
+    traitAux= Trait_suma.new
     metodosT1= self.metodosTrait.clone
     metodosT2= unTrait.metodosTrait.clone
     metodosT2.each{|unElemento|

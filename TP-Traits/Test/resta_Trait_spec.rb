@@ -1,6 +1,6 @@
 require 'rspec'
-require '../../TP-Traits/Src/trait.rb'
-require '../../TP-Traits/Src/clase.rb'
+require '../../TP-Traits/Src/Trait/trait'
+require '../../TP-Traits/Src/ClasesBase/clase'
 
 describe 'My behaviour' do
   #-----------------------------------------------------------------------------

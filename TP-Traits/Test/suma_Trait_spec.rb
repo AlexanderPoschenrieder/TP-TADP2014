@@ -1,6 +1,6 @@
 require 'rspec'
-require '../../TP-Traits/Src/clase'
-require '../../TP-Traits/Src/trait'
+require '../../TP-Traits/Src/ClasesBase/clase'
+require '../../TP-Traits/Src/Trait/trait_suma'
 
 describe 'Suma de dos traits' do
   #-----------------------------------------------------------------------------

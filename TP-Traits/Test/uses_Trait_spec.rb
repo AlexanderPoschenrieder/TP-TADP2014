@@ -1,6 +1,6 @@
 require 'rspec'
-require '../../TP-Traits/Src/trait.rb'
-require '../../TP-Traits/Src/clase.rb'
+require '../../TP-Traits/Src/Trait/trait_suma'
+require '../../TP-Traits/Src/ClasesBase/clase'
 
 describe 'El metodo Uses agrega los metodos' do
   #-----------------------------------------------------------------------------

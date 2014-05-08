@@ -1,7 +1,9 @@
 require 'rspec'
-require '../../TP-Traits/Src/clase'
-require '../../TP-Traits/Src/trait'
-require '../../TP-Traits/Src/symbol'
+require '../../TP-Traits/Src/ClasesBase/clase'
+require '../../TP-Traits/Src/Trait/trait_suma'
+require '../../TP-Traits/Src/ClasesBase/clase'
+require '../../TP-Traits/Src/ClasesBase/symbol'
+
 
 describe 'My behaviour' do
   bloques1 = {
@@ -15,7 +17,7 @@ describe 'My behaviour' do
   Trait.define(:UnTrait,bloques1)
   Trait.define(:OtroTrait,bloques2)
   class Clase1
-    uses UnTrait<<(:metodo1>:nuevoMetodo1)
+    uses UnTrait <<(:metodo1>:nuevoMetodo1)
   end
 
   class Clase2
