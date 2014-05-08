@@ -31,16 +31,7 @@ class Trait
   ##Que tiene todos los metodos
   def + unTrait
     traitAux= Trait_suma.new
-    metodosT1= self.metodosTrait.clone
-    metodosT2= unTrait.metodosTrait.clone
-    metodosT2.each{|unElemento|
-      if !(metodosT1.has_key? unElemento[0])
-        metodosT1.store(unElemento[0],unElemento[1])
-        metodosT2.delete(unElemento[0])
-      end
-    }
-    traitAux.metodosTrait= metodosT1
-    traitAux.metodosConflictivos= metodosT2
+    traitAux.sumar_metodos(self.metodosTrait.clone,unTrait.metodosTrait.clone)
     traitAux
   end
 
