@@ -1,6 +1,4 @@
 class Estrategia
-
-  def aplicar_estrategia un_trait
+  def aplicar un_trait
   end
-
 end

@@ -3,7 +3,7 @@ class Trait
 
   ##Chequea que el metodo no exista
   ## y lo agrega
-  def agregar_metodo (unaClase,nombre,bloque)
+  def agregar_metodo (unaClase,nombre,&bloque)
     if (!unaClase.instance_methods.include?(nombre))
       unaClase.send :define_method, nombre, bloque
     end
