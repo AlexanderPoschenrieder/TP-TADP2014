@@ -31,10 +31,10 @@ describe 'My behaviour' do
   class Clase2
     attr_accessor :numero
   end
-  #class Clase4
-  #  attr_accessor :numero
-  #  uses (Trait3+Trait4).aplicar_estrategia(Ejecutar_en_orden.new)
-  #end
+  class Clase4
+    attr_accessor :numero
+    uses (Trait3+Trait4).aplicar_estrategia(Ejecutar_en_orden.new)
+  end
 
   it 'usa Estrategia ejecutar en orden' do
     unObjeto= Clase1.new
@@ -46,10 +46,10 @@ describe 'My behaviour' do
     expect{Clase2.uses(Trait1+Trait3).aplicar_estrategia(Ejecutar_en_orden.new)}.to raise_error
   end
 
-  #it 'suma de dos metodos con varios parametros' do
-  #  unObjeto= Clase4.new
-  #  unObjeto.metodo1(4)
-  #  unObjeto.numero.should== 8
-  #end
+  it 'suma de dos metodos con varios parametros' do
+    unObjeto= Clase4.new
+    unObjeto.metodo1(4)
+    unObjeto.numero.should== 8
+  end
 
 end
