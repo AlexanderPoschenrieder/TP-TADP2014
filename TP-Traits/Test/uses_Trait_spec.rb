@@ -8,7 +8,8 @@ describe 'El metodo Uses agrega los metodos' do
   bloques={
         :miNumeroFavoritoEs=>lambda{3},
         :devuelve5 =>lambda{5},
-        :devuelveTuNumero => lambda{unNumero}
+        :devuelveTuNumero => lambda{unNumero},
+        :devuelveEstosNumeros=> lambda{|numero1,numero2,numero3|[numero1,numero2,numero3]}
      }
 
     Trait.define(:TraitLoco,bloques)
@@ -52,4 +53,8 @@ describe 'El metodo Uses agrega los metodos' do
     numeroModificable.unNumero =8
     numeroModificable.devuelveTuNumero.should==8
   end
+  it 'prueba con métodos con argumentos' do
+    numeroModificable.devuelveEstosNumeros(1,2,3).should== [1,2,3]
+  end
 end
+

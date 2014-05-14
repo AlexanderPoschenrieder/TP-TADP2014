@@ -12,8 +12,8 @@ class Ejecutar_en_orden <Estrategia
 
   def armar_metodo unBloque, otroBloque
     lambda{
-        self.instance_eval unBloque
-        self.instance_eval otroBloque
+      self.instance_eval &unBloque
+      self.instance_eval &otroBloque
     }
   end
 end

@@ -13,7 +13,7 @@ class Trait
   ##
   def agregarMetodos unaClase
     self.metodosTrait.each do |metodoHash|
-      self.agregar_metodo(unaClase,metodoHash[0],metodoHash[1])
+      self.agregar_metodo(unaClase,metodoHash[0],&metodoHash[1])
     end
   end
 
