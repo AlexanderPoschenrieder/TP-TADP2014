@@ -13,16 +13,20 @@ describe 'My behaviour' do
       :metodo1=> Proc.new{self.numero= self.numero+2}
   }
   bloques3={
-      :metodo1=> Proc.new{|unNumero| self.numero=unNumero}
+      :metodo1=> Proc.new{|unNumero,otroNumero| puts '1';self.numero=unNumero+otroNumero}
   }
   bloques4= {
-      :metodo1 => Proc.new{|unNumero| self.numero=self.numero+unNumero}
+      :metodo1 => Proc.new{|unNumero,otroNumero| puts'2';self.numero=self.numero+unNumero+otroNumero}
+  }
+  bloques5= {
+      :metodo1=> Proc.new{|unNumero,otroNumero| puts'3';self.numero=self.numero/2}
   }
 
   Trait.define(:Trait1,bloques1)
   Trait.define(:Trait2,bloques2)
   Trait.define(:Trait3,bloques3)
   Trait.define(:Trait4,bloques4)
+  Trait.define(:Trait5,bloques5)
 
   class Clase1
     attr_accessor :numero
@@ -34,6 +38,11 @@ describe 'My behaviour' do
   class Clase4
     attr_accessor :numero
     uses (Trait3+Trait4).aplicar_estrategia(Ejecutar_en_orden.new)
+  end
+
+  class Clase5
+    attr_accessor :numero
+    uses (Trait3+Trait4+Trait5).aplicar_estrategia(Ejecutar_en_orden.new)
   end
 
   it 'usa Estrategia ejecutar en orden' do
@@ -48,8 +57,18 @@ describe 'My behaviour' do
 
   it 'suma de dos metodos con varios parametros' do
     unObjeto= Clase4.new
-    unObjeto.metodo1(4)
-    unObjeto.numero.should== 8
+    unObjeto.metodo1(4,4)
+    unObjeto.numero.should== 16
+  end
+
+  #it 'suma mas de dos metodos con varios parametros' do
+  #  unObjeto= Clase5.new
+  #  unObjeto.metodo1(4,4)
+  #  unObjeto.numero.should==8
+  #end
+
+  it 'prueba de estrategia con función' do
+      #sin implementar
   end
 
 end

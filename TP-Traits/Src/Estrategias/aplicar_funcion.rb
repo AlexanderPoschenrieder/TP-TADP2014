@@ -7,7 +7,10 @@ class Aplicar_funcion<Estrategia
   end
 
   def armar_metodo unBloque,otroBloque
-    una_func(instance_eval(&unBloque),instance_eval(&otroBloque))
+    lambda{
+      |*params|
+    una_func(self.instance_exec(*params,&unBloque),self.instance_exec(*params,&otroBloque))
+    }
   end
 
 end

@@ -2,11 +2,13 @@ require_relative 'estrategia'
 
 class Ejecutar_en_orden <Estrategia
 
-  def armar_metodo unBloque, otroBloque
+  def armar_metodo unConflicto
     lambda{
       |*parametros|
-      self.instance_exec *parametros, &unBloque
-      self.instance_exec *parametros, &otroBloque
+      unConflicto.bloques_conf.each{
+        |unBloque|
+        self.instance_exec *parametros, &unBloque
+      }
     }
   end
 end

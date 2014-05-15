@@ -1,23 +1,26 @@
 require_relative '../../Src/Trait/trait'
+require_relative 'conflicto'
 
 class Trait_suma < Trait
   attr_accessor  :metodosConflictivos,:conflictos
 
   def initialize
     self.conflictos=false
-    self.metodosConflictivos=Hash.new()
+    self.metodosConflictivos=[]
   end
 
   def sumar_metodos (metodos_t1,metodos_t2)
     metodos_t2.each{|unElemento|
       if !(metodos_t1.has_key? unElemento[0])
         metodos_t1.store(unElemento[0],unElemento[1])
+      #elsif (metodosConflictivos.any?{|elemento| elemento.nombre_metodo==unElemento[0]})
+      #  metodosConflictivos.first{|elemento|elemento.nombre_metodo==unElemento[0]}.bloques_conf<<unElemento[1]
       else
         self.conflictos=true
-        self.metodosConflictivos.store(
-            unElemento[0],                               #nombre del mensaje
-            [metodos_t1[unElemento[0]],unElemento[1]]    #metodos ordenados
-        )
+        unConflicto=Conflicto.new(unElemento[0])
+        unConflicto.agregar_conf metodos_t1[unElemento[0]]
+        unConflicto.agregar_conf unElemento[1]
+        metodosConflictivos<<unConflicto
       end
     }
     self.metodosTrait=metodos_t1

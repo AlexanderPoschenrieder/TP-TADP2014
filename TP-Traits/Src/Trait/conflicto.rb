@@ -1,12 +1,15 @@
 
 class Conflicto
 
-  attr_accessor :metodo1,:metodo2,:nombre_metodo
+  attr_accessor :bloques_conf,:nombre_metodo
 
-  def initialize nombre,mtd1,mtd2
+  def initialize nombre
     self.nombre_metodo=nombre
-    self.metodo1=mtd1
-    self.metodo2=mtd2
+    self.bloques_conf=[]
+  end
+
+  def agregar_conf bloque
+    self.bloques_conf << bloque
   end
 
   #def suma_en_orden un_trait

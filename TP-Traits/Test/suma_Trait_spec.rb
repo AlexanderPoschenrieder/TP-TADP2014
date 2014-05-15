@@ -43,8 +43,6 @@ describe 'Suma de dos traits' do
   it 'verificar que los metodos conflictivos queden registrados' do
 
     nuevoTrait= UnTrait + OtroTrait
-    nuevoTrait.metodosConflictivos.has_key?(:metodo2).should== true
-
+    nuevoTrait.metodosConflictivos.any?{|unConflicto|unConflicto.nombre_metodo==:metodo2}.should== true
   end
-
 end
