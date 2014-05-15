@@ -2,7 +2,7 @@ require_relative '../../Src/Trait/trait'
 require_relative 'conflicto'
 
 class Trait_suma < Trait
-  attr_accessor  :metodosConflictivos,:conflictos
+  attr_accessor  :metodosConflictivos
 
   def initialize
     self.conflictos=false

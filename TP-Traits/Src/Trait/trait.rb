@@ -1,6 +1,10 @@
 class Trait
-  attr_accessor :nombreTrait, :metodosTrait
+  attr_accessor :nombreTrait, :metodosTrait,:conflictos
 
+
+  def initialize
+    self.conflictos= false
+  end
   ##Chequea que el metodo no exista
   ## y lo agrega
   def agregar_metodo (unaClase,nombre,&bloque)
