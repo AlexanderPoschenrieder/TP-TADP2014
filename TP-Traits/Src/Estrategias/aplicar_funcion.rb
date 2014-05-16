@@ -10,6 +10,7 @@ class Aplicar_funcion<Estrategia
     unaFunc=self.una_funcion
     lambda{
       |*params|
+      resultado=0
       i=0
       arrayBloques.each{
         |unBloque|
@@ -17,10 +18,11 @@ class Aplicar_funcion<Estrategia
           resultado=self.instance_exec(*params,&unBloque)
           i=i+1
         else
-          unaFunc.call(resultado,self.instance_exec( *params,&unBloque))
+          resultado=unaFunc.call(resultado,self.instance_exec( *params,&unBloque))
           i=i+1
         end
       }
+      resultado
     }
   end
 end

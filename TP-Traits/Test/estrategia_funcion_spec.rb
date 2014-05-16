@@ -31,6 +31,6 @@ describe 'My behaviour' do
 
   it 'prueba de estrategia con función' do
     unObjeto=Clase6.new
-    unObjeto.metodo1(4,4).should==16
+    unObjeto.metodo1(4,4).should==24
   end
 end
