@@ -6,16 +6,24 @@ require '../../TP-Traits/Src/ClasesBase/symbol'
 
 
 describe 'My behaviour' do
-  bloques1 = {
-      :metodo1=> lambda{1},
-      :metodo2=> lambda{2}
-  }
-  bloques2= {
-      :metodo2=> lambda{3}
-  }
 
-  Trait.define(:UnTrait,bloques1)
-  Trait.define(:OtroTrait,bloques2)
+  Trait.define do
+    nombre :UnTrait
+    metodo :metodo1 do
+      1
+    end
+    metodo :metodo2 do
+      2
+    end
+  end
+
+  Trait.define do
+    nombre :OtroTrait
+    metodo :metodo2 do
+      3
+    end
+  end
+
   class Clase1
     uses UnTrait <<(:metodo1>:nuevoMetodo1)
   end

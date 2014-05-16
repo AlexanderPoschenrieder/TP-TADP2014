@@ -4,29 +4,48 @@ require '../Src/Trait/trait_suma'
 require '../../TP-Traits/Src/ClasesBase/clase'
 
 describe 'My behaviour' do
-  bloques1 = {
-      :metodo1=> Proc.new{self.numero= 1}
-  }
 
-  bloques2= {
-      :metodo2=> Proc.new{self.numero2=2},
-      :metodo1=> Proc.new{self.numero= self.numero+2}
-  }
-  bloques3={
-      :metodo1=> Proc.new{|unNumero,otroNumero| puts '1';self.numero=unNumero+otroNumero}
-  }
-  bloques4= {
-      :metodo1 => Proc.new{|unNumero,otroNumero| puts'2';self.numero=self.numero+unNumero+otroNumero}
-  }
-  bloques5= {
-      :metodo1 => Proc.new{|unNumero,otroNumero| puts'3';self.numero=self.numero/2}
-  }
+  Trait.define do
+    nombre :Trait1
+    metodo :metodo1 do
+      self.numero=1
+    end
+  end
 
-  Trait.define(:Trait1,bloques1)
-  Trait.define(:Trait2,bloques2)
-  Trait.define(:Trait3,bloques3)
-  Trait.define(:Trait4,bloques4)
-  Trait.define(:Trait5,bloques5)
+  Trait.define do
+    nombre :Trait2
+    metodo :metodo do
+      self.numero2=2
+    end
+    metodo :metodo1 do
+      self.numero= self.numero+2
+    end
+  end
+
+  Trait.define do
+    nombre :Trait3
+    metodo :metodo1 do
+    |unNumero,otroNumero| puts '1';self.numero=unNumero+otroNumero
+    end
+  end
+
+  Trait.define do
+    nombre :Trait4
+    metodo :metodo1 do
+    |unNumero,otroNumero|
+      puts'2';
+      self.numero=self.numero+unNumero+otroNumero
+    end
+  end
+
+  Trait.define do
+    nombre :Trait5
+    metodo :metodo1 do
+    |unNumero,otroNumero|
+      puts'3';
+      self.numero=self.numero/2
+    end
+  end
 
 
   class Clase1

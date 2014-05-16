@@ -5,11 +5,16 @@ require '../../TP-Traits/Src/ClasesBase/clase'
 describe 'My behaviour' do
   #-----------------------------------------------------------------------------
   #--------------Juego de datos-------------------------------------------------
-  metodos1={
-      :metodo1=> lambda{5},
-      :metodo2=> lambda{6}
-  }
-  Trait.define(:ElGranTrait,metodos1)
+
+  Trait.define do
+    nombre :ElGranTrait
+    metodo :metodo1 do
+      5
+    end
+    metodo :metodo2 do
+      6
+    end
+  end
   #-----------------------------------------------------------------------------
   #-----------------------------------------------------------------------------
   it 'resta el metodo1 al Trait' do

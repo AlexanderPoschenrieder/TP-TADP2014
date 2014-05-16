@@ -2,21 +2,34 @@ require_relative 'conflictos'
 
 class Trait
   attr_accessor :nombre, :metodos, :conflictos
+  attr_accessor :nombre_definido
 
   def initialize
     self.metodos = {}
     self.conflictos = Conflictos.new
   end
 
-  #Metodo de clase para definir un nuevo Trait
-  #Se le pasa un SYMBOL como nombre y un mapa de (mensaje=>metodo)
-  #Crea una constante con ese nombre y mete el Trait
-  def self.define(nombre,metodos)
-    nuevoTrait=Trait.new
-    nuevoTrait.metodos= (metodos)
-    Object.const_set(nombre,nuevoTrait)
+  ####-----------------Métodos para la interfaz mas linda------------------------#####
+  def nombre unSymbol
+    if !nombre_definido
+      Object.const_set(unSymbol,self)
+      self.nombre_definido=true
+    else
+      raise("no puede definir mas de una vez el nombre de un Trait")
+    end
   end
 
+  def metodo unSymbol, &unBloque
+    self.metodos[unSymbol]=unBloque
+  end
+
+  def self.define &bloque
+    nuevoTrait= Trait.new()
+    nuevoTrait.nombre_definido=false
+    nuevoTrait.instance_eval &bloque
+  end
+
+  ####----------------------------------------------------------------------------#####
   ##Agrega todos los metodos del Trait
   ##
   def agregarMetodos unaClase

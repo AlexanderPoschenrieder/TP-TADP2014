@@ -5,14 +5,22 @@ require '../../TP-Traits/Src/ClasesBase/clase'
 describe 'El metodo Uses agrega los metodos' do
   #-----------------------------------------------------------------------------
   #--------------Juego de datos-------------------------------------------------
-  bloques={
-        :miNumeroFavoritoEs=>lambda{3},
-        :devuelve5 =>lambda{5},
-        :devuelveTuNumero => lambda{unNumero},
-        :devuelveEstosNumeros=> lambda{|numero1,numero2,numero3|[numero1,numero2,numero3]}
-     }
-
-    Trait.define(:TraitLoco,bloques)
+  Trait.define do
+    nombre :TraitLoco
+    metodo :miNumeroFavoritoEs do
+      3
+    end
+    metodo :devuelve5 do
+      5
+    end
+    metodo :devuelveTuNumero do
+      unNumero
+    end
+    metodo :devuelveEstosNumeros do
+    |numero1,numero2,numero3|
+      [numero1,numero2,numero3]
+    end
+  end
 
     class Devuelve_numero6
       uses TraitLoco
