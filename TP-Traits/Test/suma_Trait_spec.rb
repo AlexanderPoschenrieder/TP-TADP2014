@@ -37,12 +37,12 @@ describe 'Suma de dos traits' do
 
   it 'la suma no afecta a los traits originales' do
     OtroTrait + UnTraitComun
-    OtroTrait.metodosTrait[:metodo3].should== nil
+    OtroTrait.metodos[:metodo3].should== nil
   end
 
   it 'verificar que los metodos conflictivos queden registrados' do
 
     nuevoTrait= UnTrait + OtroTrait
-    nuevoTrait.metodosConflictivos.any?{|unConflicto|unConflicto.nombre_metodo==:metodo2}.should== true
+    nuevoTrait.conflictos.hashConflictos.has_key?(:metodo2).should== true
   end
 end

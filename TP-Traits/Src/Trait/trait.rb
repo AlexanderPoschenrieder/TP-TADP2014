@@ -1,10 +1,30 @@
-class Trait
-  attr_accessor :nombreTrait, :metodosTrait,:conflictos
+require_relative 'conflictos'
 
+class Trait
+  attr_accessor :nombre, :metodos, :conflictos
 
   def initialize
-    self.conflictos= false
+    self.metodos = {}
+    self.conflictos = Conflictos.new
   end
+
+  #Metodo de clase para definir un nuevo Trait
+  #Se le pasa un SYMBOL como nombre y un mapa de (mensaje=>metodo)
+  #Crea una constante con ese nombre y mete el Trait
+  def self.define(nombre,metodos)
+    nuevoTrait=Trait.new
+    nuevoTrait.metodos= (metodos)
+    Object.const_set(nombre,nuevoTrait)
+  end
+
+  ##Agrega todos los metodos del Trait
+  ##
+  def agregarMetodos unaClase
+    self.metodos.each do |metodo|
+      self.agregar_metodo(unaClase,metodo[0],&metodo[1])
+    end
+  end
+
   ##Chequea que el metodo no exista
   ## y lo agrega
   def agregar_metodo (unaClase,nombre,&bloque)
@@ -13,45 +33,61 @@ class Trait
     end
   end
 
-  ##Agrega todos los metodos del Trait
-  ##
-  def agregarMetodos unaClase
-    self.metodosTrait.each do |metodoHash|
-      self.agregar_metodo(unaClase,metodoHash[0],&metodoHash[1])
-    end
+  def tiene_conflictos?
+    self.conflictos.existen?
   end
 
-  #Metodo de clase para definir un nuevo Trait
-  #Se le pasa un SYMBOL como nombre y un mapa de (mensaje=>metodo)
-  #Crea una constante con ese nombre y mete el Trait
-  def self.define(nombre,metodos)
-    nuevoTrait=Trait.new
-    nuevoTrait.metodosTrait= (metodos)
-    Object.const_set(nombre,nuevoTrait)
+  def tenes_metodo? metodo
+    self.metodos.has_key? metodo[0]
   end
-
 
   ##Recibe un Trait y retorna una nueva instancia de Trait
   ##Que tiene todos los metodos
   def + unTrait
-    traitAux= Trait_suma.new
-    traitAux.metodosTrait = metodosTrait
-    traitAux.sumar_metodos(unTrait.metodosTrait.clone)
+
+    traitAux= Trait.new
+
+    traitAux.conflictos.mergear(self.conflictos,unTrait.conflictos)
+
+    metodosUnTrait = unTrait.metodos.clone # se le removeran los conflictivos a continuacion
+
+    self.metodos.each do |metodo|
+      if ( unTrait.tenes_metodo? metodo)
+        traitAux.conflictos.agregar_metodo(metodo[0],metodo[1])
+        traitAux.conflictos.agregar_metodo(metodo[0],metodosUnTrait[metodo[0]])
+        metodosUnTrait.delete(metodo[0])
+      else
+        traitAux.metodos.store(metodo[0],metodo[1])
+      end
+    end
+
+    metodosUnTrait.each { |metodo|
+      if ( traitAux.conflictos.tenes_metodo? metodo[0])
+        traitAux.conflictos.agregar_metodo(metodo[0],metodo[1])
+      else
+        traitAux.metodos.store(metodo[0],metodo[1])
+      end
+    }
+
     traitAux
   end
 
-  def - unMetodo
+  def - nombreMetodo
     traitAux= Trait.new
-    traitAux.metodosTrait= self.metodosTrait.clone
-    traitAux.metodosTrait.delete(unMetodo)
+    traitAux.metodos= self.metodos.clone
+    traitAux.metodos.delete(nombreMetodo)
     traitAux
   end
 
   def << dos_nombres
     traitAux= Trait.new
-    traitAux.metodosTrait= self.metodosTrait.clone
-    traitAux.metodosTrait[dos_nombres[1]]=traitAux.metodosTrait[dos_nombres[0]]
-    traitAux.metodosTrait.delete(dos_nombres[0])
+    traitAux.metodos = self.metodos.clone
+    traitAux.metodos[dos_nombres[1]] = traitAux.metodos[dos_nombres[0]]
+    traitAux.metodos.delete(dos_nombres[0]) # <- es realmente necesario borrarlo?
     traitAux
+  end
+
+  def aplicar_estrategia unaEstrategia
+    unaEstrategia.aplicar self
   end
 end

@@ -35,7 +35,7 @@ describe 'My behaviour' do
   end
 
   it 'no se modifica el trait original' do
-    UnTrait.metodosTrait[:metodo1].should_not==nil
+    UnTrait.metodos[:metodo1].should_not==nil
   end
   it 'suma de traits con mismos metodos y sin conflicto' do
     unObjeto2.metodo2.should==2
