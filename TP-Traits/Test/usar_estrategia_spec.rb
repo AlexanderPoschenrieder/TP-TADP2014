@@ -1,5 +1,6 @@
 require 'rspec'
 require  '../../TP-Traits/Src/Estrategias/ejecutar_en_orden'
+require  '../../TP-Traits/Src/Estrategias/ultimo_valor_de_retorno'
 require '../Src/Trait/trait_suma'
 require '../../TP-Traits/Src/ClasesBase/clase'
 
