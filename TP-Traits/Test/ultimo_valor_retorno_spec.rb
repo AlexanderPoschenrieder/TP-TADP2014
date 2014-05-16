@@ -2,6 +2,7 @@ require 'rspec'
 require '../../TP-Traits/Src/Estrategias/ultimo_valor_de_retorno'
 require '../../TP-Traits/Src/Trait/trait'
 require '../Src/Trait/trait_suma'
+require '../../TP-Traits/Src/ClasesBase/clase'
 
 describe 'Estrategia ultimo valor de retorno' do
 
