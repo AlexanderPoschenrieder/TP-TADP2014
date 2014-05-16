@@ -89,6 +89,9 @@ class Trait
     traitAux= Trait.new
     traitAux.metodos= self.metodos.clone
     traitAux.metodos.delete(nombreMetodo)
+    if ( traitAux.conflictos.tenes_metodo? nombreMetodo )
+      traitAux.conflictos.remover(nombreMetodo)
+    end
     traitAux
   end
 
