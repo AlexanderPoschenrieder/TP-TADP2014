@@ -47,6 +47,19 @@ describe 'My behaviour' do
     end
   end
 
+  Trait.define do
+    nombre :Trait6
+    metodo :metodo1 do
+      1
+    end
+  end
+
+  Trait.define do
+    nombre :Trait7
+    metodo :metodo1 do
+      -1
+    end
+  end
 
   class Clase1
     attr_accessor :numero
@@ -65,6 +78,13 @@ describe 'My behaviour' do
     unTrait = (Trait3+Trait4+Trait5)
     unTrait.aplicar_estrategia(Ejecutar_en_orden.new)
     uses unTrait
+  end
+
+  class ClaseUltimoValor
+    unTrait = (Trait6 + Trait7)
+    una_funcion = Proc.new{|numero| numero > 0}
+    unTrait.aplicar_estrategia(Ultimo_valor_de_retorno.new(una_funcion))
+    uses(unTrait)
   end
 
   it 'usa Estrategia ejecutar en orden' do
@@ -91,6 +111,8 @@ describe 'My behaviour' do
 
   it 'prueba de estrategia con función' do
       #sin implementar
+    objetoValorRetorno = ClaseUltimoValor.new
+    objetoValorRetorno.metodo1.should == 1
   end
 
 end
