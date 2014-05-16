@@ -9,23 +9,42 @@ class Trait_suma < Trait
     self.metodosConflictivos=[]
   end
 
-  def sumar_metodos (metodos_t1,metodos_t2)
+  def sumar_metodos (metodos_t2)
     metodos_t2.each{|unElemento|
-      if !(metodos_t1.has_key? unElemento[0])
-        metodos_t1.store(unElemento[0],unElemento[1])
-      #elsif (metodosConflictivos.any?{|elemento| elemento.nombre_metodo==unElemento[0]})
-      #  metodosConflictivos.first{|elemento|elemento.nombre_metodo==unElemento[0]}.bloques_conf<<unElemento[1]
+      if !tenes_metodo? unElemento
+        incluir_metodo(unElemento)
+      elsif existe_conflicto? unElemento
+        agregar_mtd_al_conf(unElemento)
       else
-        self.conflictos=true
-        unConflicto=Conflicto.new(unElemento[0])
-        unConflicto.agregar_conf metodos_t1[unElemento[0]]
-        unConflicto.agregar_conf unElemento[1]
-        metodosConflictivos<<unConflicto
+        crear_conflicto(unElemento)
       end
     }
-    self.metodosTrait=metodos_t1
   end
 
+  def crear_conflicto nombre_metodo
+    self.conflictos=true
+    unConflicto=Conflicto.new(nombre_metodo[0])
+    unConflicto.agregar_conf metodosTrait[nombre_metodo[0]]
+    unConflicto.agregar_conf nombre_metodo[1]
+    metodosTrait.delete(nombre_metodo[0])   #elimina el metodo de la lista de metodos porque tiene conflicto
+    metodosConflictivos<<unConflicto
+  end
+
+  def existe_conflicto? nombre_metodo
+    metodosConflictivos.any?{|un_elemento| un_elemento.nombre_metodo==nombre_metodo[0]}
+  end
+
+  def agregar_mtd_al_conf nombre_metodo
+    metodosConflictivos.first{|un_elemento| un_elemento.nombre_metodo==nombre_metodo[0]}.agregar_conf(nombre_metodo[1])
+  end
+
+  def incluir_metodo nombre_metodo
+    metodosTrait.store(nombre_metodo[0],nombre_metodo[1])
+  end
+
+  def tenes_metodo? nombre_metodo
+    metodosTrait.has_key? nombre_metodo[0]
+  end
 
   def aplicar_estrategia unaEstrategia
     unaEstrategia.aplicar self

@@ -35,7 +35,8 @@ class Trait
   ##Que tiene todos los metodos
   def + unTrait
     traitAux= Trait_suma.new
-    traitAux.sumar_metodos(self.metodosTrait.clone,unTrait.metodosTrait.clone)
+    traitAux.metodosTrait = metodosTrait
+    traitAux.sumar_metodos(unTrait.metodosTrait.clone)
     traitAux
   end
 
