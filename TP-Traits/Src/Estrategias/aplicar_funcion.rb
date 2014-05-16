@@ -1,4 +1,4 @@
-require 'TP-Traits/Src/Estrategias/estrategia'
+require_relative 'estrategia'
 
 class Aplicar_funcion<Estrategia
   attr_accessor :una_funcion
@@ -6,11 +6,21 @@ class Aplicar_funcion<Estrategia
     self.una_funcion =una_func
   end
 
-  def armar_metodo unBloque,otroBloque
+  def armar_metodo arrayBloques
+    unaFunc=self.una_funcion
     lambda{
       |*params|
-    una_func(self.instance_exec(*params,&unBloque),self.instance_exec(*params,&otroBloque))
+      i=0
+      arrayBloques.each{
+        |unBloque|
+        if i==0
+          resultado=self.instance_exec(*params,&unBloque)
+          i=i+1
+        else
+          unaFunc.call(resultado,self.instance_exec( *params,&unBloque))
+          i=i+1
+        end
+      }
     }
   end
-
 end
